@@ -136,16 +136,18 @@ Function Get-Disks {
       
     $FormattedDisks = New-Object System.Collections.Generic.List[System.Object];
 
-    $NumDisks = (Get-WmiObject Win32_LogicalDisk).Count;
+    $Disks = @()
+    $Disks += Get-WmiObject Win32_LogicalDisk
+    $NumDisks = $Disks.Count;
 
     for ($i=0; $i -lt ($NumDisks); $i++) {
-        $DiskID = (Get-WmiObject Win32_LogicalDisk)[$i].DeviceId;
+        $DiskID = $Disks[$i].DeviceId;
 
-        $FreeDiskSize = (Get-WmiObject Win32_LogicalDisk)[$i].FreeSpace
+        $FreeDiskSize = $Disks[$i].FreeSpace
         $FreeDiskSizeGB = $FreeDiskSize / 1073741824;
         $FreeDiskSizeGB = "{0:N0}" -f $FreeDiskSizeGB;
 
-        $DiskSize = (Get-WmiObject Win32_LogicalDisk)[$i].Size;
+        $DiskSize = $Disks[$i].Size;
         $DiskSizeGB = $DiskSize / 1073741824;
         $DiskSizeGB = "{0:N0}" -f $DiskSizeGB;
 
