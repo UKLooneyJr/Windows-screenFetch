@@ -109,7 +109,7 @@ Function Get-WM {
 }
 
 Function Get-Font {
-    return "Segoe UI";
+    return "Fixedsys";
 }
 
 Function Get-CPU {
